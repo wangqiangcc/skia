@@ -11,6 +11,7 @@ option(SKIA_WEBP "Build Skia with webp support" OFF)
 option(SKIA_PDF "Build Skia with PDF support" OFF)
 # option(SKIA_XML "Build Skia with xml support" OFF)
 option(SKIA_GLFW "Build Skia with glfw support" OFF)
+option(SKIA_TOOLS_WINDOW "Build Skia tools window support" ON)
 
 if(SKIA_STATIC AND SKIA_SHARED)
   message(ERROR "You cna only use one of SKIA_STATIC, SKIA_STATIC")
@@ -978,6 +979,14 @@ endif()
 if(SKIA_GLFW)
   list(APPEND skia_sources
     src/gpu/ganesh/gl/glfw/GrGLMakeNativeInterface_glfw.cpp
+  )
+endif()
+
+if(SKIA_TOOLS_WINDOW)
+  list(APPEND skia_sources
+    tools/window/WindowContext.cpp
+	tools/window/GLWindowContext.cpp
+	tools/gpu/gl/win/SkWGL_win.cpp
   )
 endif()
 
